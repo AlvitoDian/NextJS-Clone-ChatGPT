@@ -12,7 +12,7 @@ export default function Sidebar() {
         isOpen ? "w-[0px]" : "w-[260px]"
       }`}
     >
-      <div className={`${isContentHidden ? "hidden" : ""}`}>
+      <div className={`w-[260px]`}>
         {/* Icon Top */}
         <div className="flex justify-between mx-[12px] pt-[8px] pb-[8px]">
           <div className="w-[40px] h-[40px] hover:bg-[#212121] p-[8px] rounded-[8px] cursor-pointer ">
