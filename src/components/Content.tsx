@@ -14,8 +14,15 @@ export default function Content() {
   };
 
   const adjustHeight = (element) => {
+    console.log(element.style.height, "height");
     element.style.height = "auto";
     const newHeight = element.scrollHeight;
+    console.log(newHeight, "scrollHeight");
+
+    if (newHeight == 74) {
+      element.style.height = "52px";
+    }
+
     if (newHeight > 200) {
       element.style.overflow = "auto";
       element.style.height = `200px`;
@@ -27,31 +34,8 @@ export default function Content() {
     }
   };
 
-  /*   const adjustHeight = (element) => {
-    element.style.height = "auto";
-    const newHeight = element.scrollHeight;
-    if (newHeight > 200) {
-      element.style.overflow = "auto";
-      setTextareaHeight(200);
-    } else {
-      element.style.overflow = "hidden";
-      element.style.height = `${newHeight}px`;
-      setTextareaHeight(newHeight);
-    }
-  };
-
-  useEffect(() => {
-    const textarea = document.getElementById("chatTextarea");
-    if (textarea) {
-      adjustHeight(textarea);
-    }
-  }, [text]); */
-
-  const secondDivHeight = textareaHeight >= 52 ? `${textareaHeight}px` : "9%";
-
   const firstDivHeight =
-    textareaHeight > 52 ? `calc(100% - ${textareaHeight}px)` : "91%";
-  console.log(textareaHeight);
+    textareaHeight >= 52 ? `calc(100% - ${textareaHeight}px)` : "91%";
   return (
     <div className="bg-[#212121] w-full h-screen transition duration-300 flex flex-col">
       <div className="overflow-auto" style={{ height: firstDivHeight }}>
@@ -219,14 +203,11 @@ export default function Content() {
         </div>
       </div>
       <div className="flex flex-col">
-        <div
-          className="bg-[#212121] flex justify-center relative"
-          /*  style={{ height: textareaHeight, maxHeight: "200px" }} */
-        >
+        <div className="bg-[#212121] flex justify-center relative">
           <textarea
             id="chatTextarea"
             placeholder="Kirim pesan ke ChatGPT"
-            className="bg-[#2f2f2f] w-[768px] rounded-[26px] resize-none transition-all duration-300"
+            className="bg-[#2f2f2f] w-[768px] rounded-[26px] resize-none transition-all duration-300 p-[13px] h-[52px]"
             value={text}
             onChange={handleChange}
           />
