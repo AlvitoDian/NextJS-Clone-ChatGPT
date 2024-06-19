@@ -18,6 +18,7 @@ export default function Content() {
     const newHeight = element.scrollHeight;
     if (newHeight > 200) {
       element.style.overflow = "auto";
+      element.style.height = `200px`;
       setTextareaHeight(200);
     } else {
       element.style.overflow = "hidden";
@@ -231,7 +232,9 @@ export default function Content() {
           />
         </div>
         <div className="flex justify-center items-center h-[35px]">
-          <span className="text-white ">Ini Footer</span>
+          <span className="text-[#b4b4b4] font-roboto-regular text-[12px]">
+            ChatGPT dapat membuat kesalahan. Periksa info penting.
+          </span>
         </div>
       </div>
     </div>
