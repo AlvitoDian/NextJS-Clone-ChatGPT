@@ -1,14 +1,59 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSidebar } from "@/contexts/SidebarContext";
 
 export default function Content() {
   const { toggleSidebar, isContentHidden } = useSidebar();
+  const [text, setText] = useState("");
+  const [textareaHeight, setTextareaHeight] = useState(52);
 
+  const handleChange = (event) => {
+    setText(event.target.value);
+    adjustHeight(event.target);
+  };
+
+  const adjustHeight = (element) => {
+    element.style.height = "auto";
+    const newHeight = element.scrollHeight;
+    if (newHeight > 200) {
+      element.style.overflow = "auto";
+      setTextareaHeight(200);
+    } else {
+      element.style.overflow = "hidden";
+      element.style.height = `${newHeight}px`;
+      setTextareaHeight(newHeight);
+    }
+  };
+
+  /*   const adjustHeight = (element) => {
+    element.style.height = "auto";
+    const newHeight = element.scrollHeight;
+    if (newHeight > 200) {
+      element.style.overflow = "auto";
+      setTextareaHeight(200);
+    } else {
+      element.style.overflow = "hidden";
+      element.style.height = `${newHeight}px`;
+      setTextareaHeight(newHeight);
+    }
+  };
+
+  useEffect(() => {
+    const textarea = document.getElementById("chatTextarea");
+    if (textarea) {
+      adjustHeight(textarea);
+    }
+  }, [text]); */
+
+  const secondDivHeight = textareaHeight >= 52 ? `${textareaHeight}px` : "9%";
+
+  const firstDivHeight =
+    textareaHeight > 52 ? `calc(100% - ${textareaHeight}px)` : "91%";
+  console.log(textareaHeight);
   return (
-    <div className="bg-[#212121] w-full max-h-screen transition duration-300 flex flex-col">
-      <div className="overflow-auto h-[91%]">
+    <div className="bg-[#212121] w-full h-screen transition duration-300 flex flex-col">
+      <div className="overflow-auto" style={{ height: firstDivHeight }}>
         <div className="sticky top-0 bg-[#212121] w-full h-[56px] flex items-center">
           <div
             className={`w-[40px] h-[40px] hover:bg-[#2f2f2f] p-[8px] rounded-[8px] cursor-pointer ml-[12px] ${
@@ -172,7 +217,23 @@ export default function Content() {
           </div>
         </div>
       </div>
-      <div className="bg-[#212121] h-[9%]"></div>
+      <div className="flex flex-col">
+        <div
+          className="bg-[#212121] flex justify-center relative"
+          /*  style={{ height: textareaHeight, maxHeight: "200px" }} */
+        >
+          <textarea
+            id="chatTextarea"
+            placeholder="Kirim pesan ke ChatGPT"
+            className="bg-[#2f2f2f] w-[768px] rounded-[26px] resize-none transition-all duration-300"
+            value={text}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="flex justify-center items-center h-[35px]">
+          <span className="text-white ">Ini Footer</span>
+        </div>
+      </div>
     </div>
   );
 }
