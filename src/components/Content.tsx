@@ -13,24 +13,30 @@ export default function Content() {
     adjustHeight(event.target);
   };
 
-  const adjustHeight = (element) => {
-    console.log(element.style.height, "height");
-    element.style.height = "auto";
-    const newHeight = element.scrollHeight;
-    console.log(newHeight, "scrollHeight");
-
-    if (newHeight == 74) {
-      element.style.height = "52px";
+  const handleBlur = (event) => {
+    if (text.trim() === "") {
+      setTextareaHeight(52);
+      event.target.style.height = "52px";
+      event.target.style.overflow = "hidden";
     }
+  };
 
-    if (newHeight > 200) {
-      element.style.overflow = "auto";
-      element.style.height = `200px`;
-      setTextareaHeight(200);
-    } else {
-      element.style.overflow = "hidden";
-      element.style.height = `${newHeight}px`;
-      setTextareaHeight(newHeight);
+  const adjustHeight = (element) => {
+    if (element.scrollHeight >= 74) {
+      console.log(element.style.height, "height");
+      element.style.height = "auto";
+      const newHeight = element.scrollHeight;
+      console.log(newHeight, "scrollHeight");
+
+      if (newHeight > 200) {
+        element.style.overflow = "auto";
+        element.style.height = `200px`;
+        setTextareaHeight(200);
+      } else {
+        element.style.overflow = "hidden";
+        element.style.height = `${newHeight}px`;
+        setTextareaHeight(newHeight);
+      }
     }
   };
 
@@ -203,14 +209,50 @@ export default function Content() {
         </div>
       </div>
       <div className="flex flex-col">
-        <div className="bg-[#212121] flex justify-center relative">
-          <textarea
-            id="chatTextarea"
-            placeholder="Kirim pesan ke ChatGPT"
-            className="bg-[#2f2f2f] w-[768px] rounded-[26px] resize-none transition-all duration-300 p-[13px] h-[52px]"
-            value={text}
-            onChange={handleChange}
-          />
+        <div className="bg-[#212121] flex justify-center">
+          <div
+            className="relative bg-[#2f2f2f] w-[768px] rounded-[26px] h-[52px] flex items-end"
+            style={{ height: textareaHeight }}
+          >
+            <div className="absolute left-[16px] mb-[14px] cursor-pointer">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#ffffff"
+                  d="M9 7a5 5 0 0 1 10 0v8a7 7 0 1 1-14 0V9a1 1 0 0 1 2 0v6a5 5 0 0 0 10 0V7a3 3 0 1 0-6 0v8a1 1 0 1 0 2 0V9a1 1 0 1 1 2 0v6a3 3 0 1 1-6 0z"
+                />
+              </svg>
+            </div>
+            <textarea
+              id="chatTextarea"
+              placeholder="Kirim pesan ke ChatGPT"
+              className="bg-transparent ml-[52px] mr-[50px] w-[768px] rounded-[26px] resize-none p-[13.5px] h-[52px] text-[#ececec] font-roboto-regular focus:outline-none focus:border-transparent"
+              value={text}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <div className="absolute right-[10px] mb-[10px] cursor-pointer">
+              <div className="bg-white w-[32px] h-[32px] rounded-full flex items-center justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  fill="none"
+                  viewBox="0 0 32 32"
+                >
+                  <path
+                    fill="#000000"
+                    d="M15.192 8.906a1.143 1.143 0 0 1 1.616 0l5.143 5.143a1.143 1.143 0 0 1-1.616 1.616l-3.192-3.192v9.813a1.143 1.143 0 0 1-2.286 0v-9.813l-3.192 3.192a1.143 1.143 0 1 1-1.616-1.616z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="flex justify-center items-center h-[35px]">
           <span className="text-[#b4b4b4] font-roboto-regular text-[12px]">
