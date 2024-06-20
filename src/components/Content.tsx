@@ -1,12 +1,43 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSidebar } from "@/contexts/SidebarContext";
+import Answer from "./Answer";
 
 export default function Content() {
   const { toggleSidebar, isContentHidden } = useSidebar();
   const [text, setText] = useState("");
   const [textareaHeight, setTextareaHeight] = useState(52);
+  const [isOpenGPTOption, setIsOpenGPTOption] = useState(false);
+  const gptOptionRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  const openGPTOptionHandler = () => {
+    setIsOpenGPTOption(!isOpenGPTOption);
+  };
+
+  const handleClickOutside = (event) => {
+    if (
+      gptOptionRef.current &&
+      !gptOptionRef.current.contains(event.target) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target)
+    ) {
+      setIsOpenGPTOption(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpenGPTOption) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpenGPTOption]);
 
   const handleChange = (event) => {
     setText(event.target.value);
@@ -42,6 +73,7 @@ export default function Content() {
 
   const firstDivHeight =
     textareaHeight >= 52 ? `calc(100% - ${textareaHeight}px)` : "91%";
+
   return (
     <div className="bg-[#212121] w-full h-screen transition duration-300 flex flex-col">
       <div className="overflow-auto" style={{ height: firstDivHeight }}>
@@ -66,193 +98,103 @@ export default function Content() {
               />
             </svg>
           </div>
-        </div>
-        <div className="flex justify-center">
-          <div className="w-[768px] bg-red-600">
-            <div>
-              <span className="text-[#ececec] font-roboto-regular">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Perspiciatis omnis, quibusdam quidem dolores, voluptates
-                adipisci facilis in vel veniam similique ut vitae. Voluptatum
-                pariatur quisquam quod accusantium. Debitis voluptatum optio
-                harum odit, repudiandae velit aliquam ex praesentium iste
-                voluptates eveniet ratione maiores libero earum? Saepe eveniet
-                possimus natus voluptatibus rem repudiandae repellat ex
-                explicabo iusto nemo dolorem nesciunt sequi excepturi aliquid
-                quibusdam perferendis soluta, quos nobis veritatis architecto.
-                Excepturi, animi voluptates a qui ipsum fugit atque delectus hic
-                libero architecto neque amet beatae doloremque dolorem obcaecati
-                molestias esse illum aspernatur odit exercitationem provident
-                consectetur mollitia? Animi, ea molestias! Fugiat aperiam ad
-                eius. Corrupti voluptatum vitae accusantium tenetur aperiam
-                maiores voluptates, tempora sint, unde earum inventore error,
-                alias porro! Magni iusto impedit quidem harum nesciunt, minima
-                nisi architecto ratione nobis, quasi, error nam ipsum cumque
-                earum aliquid quam voluptatibus commodi laudantium? Sint quia
-                aut sed impedit laborum voluptas earum rerum cupiditate mollitia
-                aliquam ipsa explicabo culpa, labore molestias placeat, odio sit
-                saepe distinctio voluptates nisi, dignissimos ipsam voluptatum
-                iusto vitae? Qui consectetur dolorum maiores ducimus nulla quod
-                temporibus nisi repudiandae! Sit facilis nam perspiciatis sed
-                quis deserunt ratione impedit tenetur et dignissimos inventore
-                consectetur doloremque est, ipsa, voluptatem iure beatae
-                necessitatibus ea eaque architecto reprehenderit odio corporis
-                debitis! Similique inventore necessitatibus est velit, a vero
-                deleniti laudantium? Velit molestias ut tempora obcaecati? Est
-                deleniti iste placeat expedita nulla velit aliquid, doloribus
-                nisi dignissimos, consequatur cum quos, corporis eligendi? Iste
-                nisi voluptatibus necessitatibus similique eligendi, temporibus,
-                in totam natus placeat consectetur quia, nihil eum nemo minus
-                quasi praesentium pariatur earum ipsum voluptates. Voluptates
-                laborum libero inventore dolor perferendis vero reprehenderit
-                cupiditate blanditiis cumque iusto ut tempore saepe accusantium
-                id ratione repudiandae totam, autem distinctio beatae ipsum,
-                quas excepturi nostrum dolore. Soluta temporibus laborum
-                laudantium, ex quis laboriosam voluptatibus eum alias. Hic
-                perferendis facilis maiores eaque temporibus, quo modi animi
-                quis magni quisquam officiis necessitatibus distinctio minus
-                eveniet nemo dicta alias culpa illo nesciunt enim. Voluptatem
-                quisquam est eveniet explicabo. Blanditiis sed provident quia
-                voluptatem quibusdam? Voluptatum, sunt doloribus, optio eius
-                modi voluptatem, accusamus esse consectetur voluptate hic
-                distinctio sapiente! Voluptates vitae minima autem laboriosam
-                fuga totam fugiat eius laudantium possimus cumque incidunt est
-                quia, iusto distinctio? Dicta ea aliquam atque placeat
-                consequatur corrupti, fugit exercitationem labore mollitia
-                distinctio laborum nemo ipsum? Praesentium ullam tenetur est
-                labore corporis placeat velit qui ducimus molestiae iure
-                similique, ratione quis debitis vitae accusantium? Possimus
-                nesciunt eveniet repudiandae ullam nam earum itaque, ut, officia
-                consequatur ducimus odit esse, neque architecto obcaecati
-                corrupti. Nesciunt aliquam natus possimus eligendi, pariatur aut
-                laboriosam debitis corrupti molestiae saepe error deleniti harum
-                voluptate, id ad libero nam tempora non impedit, adipisci rerum
-                asperiores ex dolores maiores? Facilis rerum eius soluta minus
-                nostrum facere, necessitatibus, accusamus at id quod magni
-                quisquam animi ducimus explicabo modi sint laboriosam. Sit animi
-                quia consequatur. Rem, ea, placeat fuga dolorum eaque voluptas
-                esse labore perferendis provident praesentium, blanditiis
-                laboriosam qui. Aut veniam magni ipsum, magnam non repellendus,
-                voluptate eos quia obcaecati enim esse assumenda. Reprehenderit,
-                ullam odio?
-              </span>
-            </div>
-            <div>
-              <span className="text-[#ececec] font-roboto-regular">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Perspiciatis omnis, quibusdam quidem dolores, voluptates
-                adipisci facilis in vel veniam similique ut vitae. Voluptatum
-                pariatur quisquam quod accusantium. Debitis voluptatum optio
-                harum odit, repudiandae velit aliquam ex praesentium iste
-                voluptates eveniet ratione maiores libero earum? Saepe eveniet
-                possimus natus voluptatibus rem repudiandae repellat ex
-                explicabo iusto nemo dolorem nesciunt sequi excepturi aliquid
-                quibusdam perferendis soluta, quos nobis veritatis architecto.
-                Excepturi, animi voluptates a qui ipsum fugit atque delectus hic
-                libero architecto neque amet beatae doloremque dolorem obcaecati
-                molestias esse illum aspernatur odit exercitationem provident
-                consectetur mollitia? Animi, ea molestias! Fugiat aperiam ad
-                eius. Corrupti voluptatum vitae accusantium tenetur aperiam
-                maiores voluptates, tempora sint, unde earum inventore error,
-                alias porro! Magni iusto impedit quidem harum nesciunt, minima
-                nisi architecto ratione nobis, quasi, error nam ipsum cumque
-                earum aliquid quam voluptatibus commodi laudantium? Sint quia
-                aut sed impedit laborum voluptas earum rerum cupiditate mollitia
-                aliquam ipsa explicabo culpa, labore molestias placeat, odio sit
-                saepe distinctio voluptates nisi, dignissimos ipsam voluptatum
-                iusto vitae? Qui consectetur dolorum maiores ducimus nulla quod
-                temporibus nisi repudiandae! Sit facilis nam perspiciatis sed
-                quis deserunt ratione impedit tenetur et dignissimos inventore
-                consectetur doloremque est, ipsa, voluptatem iure beatae
-                necessitatibus ea eaque architecto reprehenderit odio corporis
-                debitis! Similique inventore necessitatibus est velit, a vero
-                deleniti laudantium? Velit molestias ut tempora obcaecati? Est
-                deleniti iste placeat expedita nulla velit aliquid, doloribus
-                nisi dignissimos, consequatur cum quos, corporis eligendi? Iste
-                nisi voluptatibus necessitatibus similique eligendi, temporibus,
-                in totam natus placeat consectetur quia, nihil eum nemo minus
-                quasi praesentium pariatur earum ipsum voluptates. Voluptates
-                laborum libero inventore dolor perferendis vero reprehenderit
-                cupiditate blanditiis cumque iusto ut tempore saepe accusantium
-                id ratione repudiandae totam, autem distinctio beatae ipsum,
-                quas excepturi nostrum dolore. Soluta temporibus laborum
-                laudantium, ex quis laboriosam voluptatibus eum alias. Hic
-                perferendis facilis maiores eaque temporibus, quo modi animi
-                quis magni quisquam officiis necessitatibus distinctio minus
-                eveniet nemo dicta alias culpa illo nesciunt enim. Voluptatem
-                quisquam est eveniet explicabo. Blanditiis sed provident quia
-                voluptatem quibusdam? Voluptatum, sunt doloribus, optio eius
-                modi voluptatem, accusamus esse consectetur voluptate hic
-                distinctio sapiente! Voluptates vitae minima autem laboriosam
-                fuga totam fugiat eius laudantium possimus cumque incidunt est
-                quia, iusto distinctio? Dicta ea aliquam atque placeat
-                consequatur corrupti, fugit exercitationem labore mollitia
-                distinctio laborum nemo ipsum? Praesentium ullam tenetur est
-                labore corporis placeat velit qui ducimus molestiae iure
-                similique, ratione quis debitis vitae accusantium? Possimus
-                nesciunt eveniet repudiandae ullam nam earum itaque, ut, officia
-                consequatur ducimus odit esse, neque architecto obcaecati
-                corrupti. Nesciunt aliquam natus possimus eligendi, pariatur aut
-                laboriosam debitis corrupti molestiae saepe error deleniti harum
-                voluptate, id ad libero nam tempora non impedit, adipisci rerum
-                asperiores ex dolores maiores? Facilis rerum eius soluta minus
-                nostrum facere, necessitatibus, accusamus at id quod magni
-                quisquam animi ducimus explicabo modi sint laboriosam. Sit animi
-                quia consequatur. Rem, ea, placeat fuga dolorum eaque voluptas
-                esse labore perferendis provident praesentium, blanditiis
-                laboriosam qui. Aut veniam magni ipsum, magnam non repellendus,
-                voluptate eos quia obcaecati enim esse assumenda. Reprehenderit,
-                ullam odio?
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="flex flex-col">
-        <div className="bg-[#212121] flex justify-center">
-          <div
-            className="relative bg-[#2f2f2f] w-[768px] rounded-[26px] h-[52px] flex items-end"
-            style={{ height: textareaHeight }}
-          >
-            <div className="absolute left-[16px] mb-[14px] cursor-pointer">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
+          <div className="relative">
+            {isOpenGPTOption && (
+              <div
+                ref={gptOptionRef}
+                className="absolute left-[12px] top-[56px] bg-[#2f2f2f] w-[340px] h-[207px] flex-col rounded-[16px] border-[1px] border-[#444444]"
+                style={{
+                  boxShadow:
+                    "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px",
+                }}
               >
-                <path
-                  fill="#ffffff"
-                  d="M9 7a5 5 0 0 1 10 0v8a7 7 0 1 1-14 0V9a1 1 0 0 1 2 0v6a5 5 0 0 0 10 0V7a3 3 0 1 0-6 0v8a1 1 0 1 0 2 0V9a1 1 0 1 1 2 0v6a3 3 0 1 1-6 0z"
-                />
-              </svg>
-            </div>
-            <textarea
-              id="chatTextarea"
-              placeholder="Kirim pesan ke ChatGPT"
-              className="bg-transparent ml-[52px] mr-[50px] w-[768px] rounded-[26px] resize-none p-[13.5px] h-[52px] text-[#ececec] font-roboto-regular focus:outline-none focus:border-transparent"
-              value={text}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            <div className="absolute right-[10px] mb-[10px] cursor-pointer">
-              <div className="bg-white w-[32px] h-[32px] rounded-full flex items-center justify-center">
+                <div className="flex mt-[9px] ml-[9px] mr-[9px]">ANJAY</div>
+                <div className="flex ml-[9px] mr-[9px]">ANJAY</div>
+                <div className="flex">ANJAY</div>
+              </div>
+            )}
+            <div
+              ref={buttonRef}
+              className="flex items-center justify-center ml-[12px] mt-[8px] w-[116px] h-[40px] rounded-[8px] hover:bg-[#2f2f2f] cursor-pointer"
+              onClick={openGPTOptionHandler}
+            >
+              <div className="ml-[12px]">
+                <span className="text-[#b4b4b4] text-[18px] font-semibold">
+                  ChatGPT
+                </span>
+              </div>
+              <div className="ml-[4px] mr-[12px]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
+                  width="18"
+                  height="18"
                   fill="none"
-                  viewBox="0 0 32 32"
+                  viewBox="0 0 24 24"
                 >
                   <path
-                    fill="#000000"
-                    d="M15.192 8.906a1.143 1.143 0 0 1 1.616 0l5.143 5.143a1.143 1.143 0 0 1-1.616 1.616l-3.192-3.192v9.813a1.143 1.143 0 0 1-2.286 0v-9.813l-3.192 3.192a1.143 1.143 0 1 1-1.616-1.616z"
+                    fill="#9b9b9b"
+                    d="M5.293 9.293a1 1 0 0 1 1.414 0L12 14.586l5.293-5.293a1 1 0 1 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414"
                   />
                 </svg>
               </div>
             </div>
           </div>
+        </div>
+        <Answer />
+        <Answer />
+        <Answer />
+        <Answer />
+        <Answer />
+        <Answer />
+        <Answer />
+      </div>
+      <div className="flex flex-col">
+        <div className="bg-[#212121] flex justify-center">
+          <form action="">
+            <div
+              className="relative bg-[#2f2f2f] w-[768px] rounded-[26px] h-[52px] flex items-end"
+              style={{ height: textareaHeight }}
+            >
+              <div className="absolute left-[16px] mb-[14px] cursor-pointer">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="#ffffff"
+                    d="M9 7a5 5 0 0 1 10 0v8a7 7 0 1 1-14 0V9a1 1 0 0 1 2 0v6a5 5 0 0 0 10 0V7a3 3 0 1 0-6 0v8a1 1 0 1 0 2 0V9a1 1 0 1 1 2 0v6a3 3 0 1 1-6 0z"
+                  />
+                </svg>
+              </div>
+              <textarea
+                id="chatTextarea"
+                placeholder="Kirim pesan ke ChatGPT"
+                className="bg-transparent ml-[52px] mr-[50px] w-[768px] rounded-[26px] resize-none p-[13.5px] h-[52px] text-[#ececec] font-roboto-regular focus:outline-none focus:border-transparent"
+                value={text}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <div className="absolute right-[10px] mb-[10px] cursor-pointer">
+                <div className="bg-white w-[32px] h-[32px] rounded-full flex items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    fill="none"
+                    viewBox="0 0 32 32"
+                  >
+                    <path
+                      fill="#000000"
+                      d="M15.192 8.906a1.143 1.143 0 0 1 1.616 0l5.143 5.143a1.143 1.143 0 0 1-1.616 1.616l-3.192-3.192v9.813a1.143 1.143 0 0 1-2.286 0v-9.813l-3.192 3.192a1.143 1.143 0 1 1-1.616-1.616z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
         <div className="flex justify-center items-center h-[35px]">
           <span className="text-[#b4b4b4] font-roboto-regular text-[12px]">
