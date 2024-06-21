@@ -5,7 +5,9 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 interface SidebarContextType {
   isOpen: boolean;
   isContentHidden: boolean;
+  isOptionClick: boolean;
   toggleSidebar: () => void;
+  handleClickOption: (state: any) => void;
 }
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
@@ -15,10 +17,16 @@ export const SidebarProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isContentHidden, setIsContentHidden] = useState(false);
+  const [isOptionClick, setIsOptionClick] = useState(false);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
     setIsContentHidden(!isContentHidden);
+  };
+
+  const handleClickOption = (state) => {
+    setIsOptionClick(state);
+    console.log(state);
   };
 
   /*   const toggleSidebar = () => {
@@ -34,7 +42,15 @@ export const SidebarProvider: React.FC<{ children: ReactNode }> = ({
   };
  */
   return (
-    <SidebarContext.Provider value={{ isOpen, isContentHidden, toggleSidebar }}>
+    <SidebarContext.Provider
+      value={{
+        isOpen,
+        isContentHidden,
+        isOptionClick,
+        toggleSidebar,
+        handleClickOption,
+      }}
+    >
       {children}
     </SidebarContext.Provider>
   );

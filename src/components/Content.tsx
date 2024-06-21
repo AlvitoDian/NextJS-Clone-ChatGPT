@@ -80,7 +80,7 @@ export default function Content() {
     textareaHeight >= 52 ? `calc(100% - ${textareaHeight}px)` : "91%";
 
   return (
-    <div className="bg-[#212121] w-full h-screen transition duration-300 flex flex-col">
+    <div className="bg-[#212121] w-full h-screen transition duration-300 flex flex-col z-[30]">
       <div className="overflow-auto" style={{ height: firstDivHeight }}>
         <div className="sticky top-0 bg-[#212121] w-full h-[56px] flex items-center">
           <div

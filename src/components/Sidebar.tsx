@@ -1,11 +1,45 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSidebar } from "@/contexts/SidebarContext";
 import ConversationTitle from "./ConversationTitle";
 
 export default function Sidebar() {
-  const { isOpen, isContentHidden, toggleSidebar } = useSidebar();
+  const {
+    isOpen,
+    isContentHidden,
+    toggleSidebar,
+    isOptionClick,
+    handleClickOption,
+  } = useSidebar();
+  const conversationRef = useRef(null);
+  const popUpRef = useRef(null);
+  const [isHoverLocation, setIsHoverLocation] = useState(0);
+
+  const handlePopUpClick = (event) => {
+    const { clientX, clientY } = event;
+    setIsHoverLocation(clientY);
+    handleClickOption(false);
+  };
+
+  /*
+  const handleClickOutside = (event) => {
+    if (!popUpRef.current.contains(event.target)) {
+      handleClickOption(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOptionClick) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOptionClick]); */
 
   return (
     <div
@@ -28,10 +62,10 @@ export default function Sidebar() {
               <path
                 fill="#b4b4b4"
                 d="M8.857 3h6.286c1.084 0 1.958 0 2.666.058.729.06 1.369.185 1.961.487a5 5 0 0 1 2.185 2.185c.302.592.428 1.233.487 1.961.058.708.058 1.582.058 2.666v3.286c0 1.084 0 1.958-.058 2.666-.06.729-.185 1.369-.487 1.961a5 5 0 0 1-2.185 2.185c-.592.302-1.232.428-1.961.487C17.1 21 16.227 21 15.143 21H8.857c-1.084 0-1.958 0-2.666-.058-.728-.06-1.369-.185-1.96-.487a5 5 0 0 1-2.186-2.185c-.302-.592-.428-1.232-.487-1.961C1.5 15.6 1.5 14.727 1.5 13.643v-3.286c0-1.084 0-1.958.058-2.666.06-.728.185-1.369.487-1.96A5 5 0 0 1 4.23 3.544c.592-.302 1.233-.428 1.961-.487C6.9 3 7.773 3 8.857 3M6.354 5.051c-.605.05-.953.142-1.216.276a3 3 0 0 0-1.311 1.311c-.134.263-.226.611-.276 1.216-.05.617-.051 1.41-.051 2.546v3.2c0 1.137 0 1.929.051 2.546.05.605.142.953.276 1.216a3 3 0 0 0 1.311 1.311c.263.134.611.226 1.216.276.617.05 1.41.051 2.546.051h.6V5h-.6c-1.137 0-1.929 0-2.546.051M11.5 5v14h3.6c1.137 0 1.929 0 2.546-.051.605-.05.953-.142 1.216-.276a3 3 0 0 0 1.311-1.311c.134-.263.226-.611.276-1.216.05-.617.051-1.41.051-2.546v-3.2c0-1.137 0-1.929-.051-2.546-.05-.605-.142-.953-.276-1.216a3 3 0 0 0-1.311-1.311c-.263-.134-.611-.226-1.216-.276C17.029 5.001 16.236 5 15.1 5zM5 8.5a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1M5 12a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1"
-                clip-rule="evenodd"
               />
             </svg>
           </div>
+
           <div className="w-[40px] h-[40px] hover:bg-[#212121] p-[8px] rounded-[8px] cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -46,6 +80,7 @@ export default function Sidebar() {
         </div>
         {/* Icon Top End */}
 
+        {/* Conversation Option */}
         <div className="flex-col pt-[20px] ml-[12px] mr-[5px] flex-none h-[86vh] overflow-auto">
           <div>
             <div className="pl-[8px] pr-[8px] pb-[8px] pt-[12px]">
@@ -81,56 +116,92 @@ export default function Sidebar() {
                 7 Hari Sebelumnya
               </span>
             </div>
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
-            <ConversationTitle />
+            <div ref={conversationRef} /* onClick={handleMouseOver} */>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} /* onClick={handleMouseOver} */>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} /* onClick={handleMouseOver} */>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} /* onClick={handleMouseOver} */>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} /* onClick={handleMouseOver} */>
+              <ConversationTitle />
+            </div>
           </div>
         </div>
+        {/* Conversation Option */}
+
+        {/* Pop up Option */}
+        <div
+          className={`absolute bg-[#2f2f2f] h-auto flex-col left-[170px] rounded-[16px] border-[1px] border-[#444444] z-[999] ${
+            !isOptionClick ? "hidden" : ""
+          }`}
+          /*     style={{ top: `${isHoverLocation}px` }} */
+          ref={popUpRef}
+        >
+          <div className="flex mt-[9px] mr-[9px] ml-[9px] p-[12px]">
+            <div className="mr-[13px]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#e3e3e3"
+                  d="M11.293 3.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 6.414V15a1 1 0 1 1-2 0V6.414L8.707 8.707a1 1 0 0 1-1.414-1.414zM4 14a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3a1 1 0 1 1 2 0v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3a1 1 0 0 1 1-1"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <span className="font-roboto-regular text-white">Bagikan</span>
+            </div>
+          </div>
+          <div className="flex mr-[9px] ml-[9px] p-[12px]">
+            <div className="mr-[13px]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#e3e3e3"
+                  d="M11.293 3.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 6.414V15a1 1 0 1 1-2 0V6.414L8.707 8.707a1 1 0 0 1-1.414-1.414zM4 14a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3a1 1 0 1 1 2 0v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3a1 1 0 0 1 1-1"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <span className="font-roboto-regular text-white">Bagikan</span>
+            </div>
+          </div>
+          <div className="flex mb-[9px] mr-[9px] ml-[9px] p-[12px]">
+            <div className="mr-[13px]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#e3e3e3"
+                  d="M11.293 3.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 6.414V15a1 1 0 1 1-2 0V6.414L8.707 8.707a1 1 0 0 1-1.414-1.414zM4 14a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3a1 1 0 1 1 2 0v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3a1 1 0 0 1 1-1"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <span className="font-roboto-regular text-white">Bagikan</span>
+            </div>
+          </div>
+        </div>
+        {/* Pop up Option */}
       </div>
     </div>
   );
