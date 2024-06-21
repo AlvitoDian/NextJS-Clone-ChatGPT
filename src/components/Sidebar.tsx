@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useSidebar } from "@/contexts/SidebarContext";
+import ConversationTitle from "./ConversationTitle";
 
 export default function Sidebar() {
   const { isOpen, isContentHidden, toggleSidebar } = useSidebar();
@@ -52,11 +53,12 @@ export default function Sidebar() {
                 Hari ini
               </span>
             </div>
-            <div className="bg-[#212121] rounded-[8px] px-[8px] py-[8px] cursor-pointer flex justify-between items-center">
-              <span className="text-[14px] text-[#ececec] font-roboto-regular">
+            <div className="bg-[#212121] rounded-[8px] px-[8px] py-[8px] cursor-pointer flex justify-between items-center overflow-hidden relative">
+              <span className="text-[14px] text-[#ececec] font-roboto-regular flex-none">
                 Date Picker zIndex Fix
+                asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd
               </span>
-              <div>
+              <div className="z-[30] absolute right-[8px]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -79,139 +81,9 @@ export default function Sidebar() {
                 7 Hari Sebelumnya
               </span>
             </div>
-            <div className="hover:bg-[#212121] rounded-[8px] px-[8px] py-[8px] cursor-pointer flex justify-between items-center">
-              <span className="text-[14px] text-[#ececec] font-roboto-regular">
-                Date Picker zIndex Fix
-              </span>
-              <div className="">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="#b4b4b4"
-                    d="M3 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0m7 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0m7 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div className="hover:bg-[#212121] rounded-[8px] px-[8px] py-[8px] cursor-pointer flex justify-between items-center">
-              <span className="text-[14px] text-[#ececec] font-roboto-regular">
-                Date Picker zIndex Fix
-              </span>
-              <div className="">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="#b4b4b4"
-                    d="M3 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0m7 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0m7 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div className="hover:bg-[#212121] rounded-[8px] px-[8px] py-[8px] cursor-pointer flex justify-between items-center">
-              <span className="text-[14px] text-[#ececec] font-roboto-regular">
-                Date Picker zIndex Fix
-              </span>
-              <div className="">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="#b4b4b4"
-                    d="M3 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0m7 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0m7 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div className="hover:bg-[#212121] rounded-[8px] px-[8px] py-[8px] cursor-pointer flex justify-between items-center">
-              <span className="text-[14px] text-[#ececec] font-roboto-regular">
-                Date Picker zIndex Fix
-              </span>
-              <div className="">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="#b4b4b4"
-                    d="M3 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0m7 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0m7 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div className="hover:bg-[#212121] rounded-[8px] px-[8px] py-[8px] cursor-pointer flex justify-between items-center">
-              <span className="text-[14px] text-[#ececec] font-roboto-regular">
-                Date Picker zIndex Fix
-              </span>
-              <div className="">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="#b4b4b4"
-                    d="M3 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0m7 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0m7 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div className="hover:bg-[#212121] rounded-[8px] px-[8px] py-[8px] cursor-pointer flex justify-between items-center">
-              <span className="text-[14px] text-[#ececec] font-roboto-regular">
-                Date Picker zIndex Fix
-              </span>
-              <div className="">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="#b4b4b4"
-                    d="M3 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0m7 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0m7 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div className="hover:bg-[#212121] rounded-[8px] px-[8px] py-[8px] cursor-pointer flex justify-between items-center">
-              <span className="text-[14px] text-[#ececec] font-roboto-regular">
-                Date Picker zIndex Fix
-              </span>
-              <div className="">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="#b4b4b4"
-                    d="M3 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0m7 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0m7 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0"
-                  />
-                </svg>
-              </div>
-            </div>
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
           </div>
         </div>
       </div>

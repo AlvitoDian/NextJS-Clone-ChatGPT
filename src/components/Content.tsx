@@ -9,6 +9,7 @@ export default function Content() {
   const [text, setText] = useState("");
   const [textareaHeight, setTextareaHeight] = useState(52);
   const [isOpenGPTOption, setIsOpenGPTOption] = useState(false);
+  const [isTempChat, setIsTempChat] = useState(false);
   const gptOptionRef = useRef(null);
   const buttonRef = useRef(null);
 
@@ -71,6 +72,10 @@ export default function Content() {
     }
   };
 
+  const tempChatClick = () => {
+    setIsTempChat(!isTempChat);
+  };
+
   const firstDivHeight =
     textareaHeight >= 52 ? `calc(100% - ${textareaHeight}px)` : "91%";
 
@@ -102,15 +107,167 @@ export default function Content() {
             {isOpenGPTOption && (
               <div
                 ref={gptOptionRef}
-                className="absolute left-[12px] top-[56px] bg-[#2f2f2f] w-[340px] h-[207px] flex-col rounded-[16px] border-[1px] border-[#444444]"
+                className="absolute left-[12px] top-[56px] bg-[#2f2f2f] w-[340px] h-auto flex-col rounded-[16px] border-[1px] border-[#444444]"
                 style={{
                   boxShadow:
                     "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -4px",
                 }}
               >
-                <div className="flex mt-[9px] ml-[9px] mr-[9px]">ANJAY</div>
-                <div className="flex ml-[9px] mr-[9px]">ANJAY</div>
-                <div className="flex">ANJAY</div>
+                {/* 1. ===== */}
+                <div className="flex mt-[9px] ml-[9px] mr-[9px] hover:bg-[#424242] rounded-[6px] cursor-pointer">
+                  <div className="p-[12px] flex">
+                    <div className="flex pr-[12px]">
+                      <div className="w-[28px] h-[28px] bg-[#424242] rounded-full flex items-center justify-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="#ffffff"
+                            d="M19.898.855a.4.4 0 0 0-.795 0c-.123 1.064-.44 1.802-.943 2.305-.503.503-1.241.82-2.306.943a.4.4 0 0 0 .001.794c1.047.119 1.801.436 2.317.942.512.504.836 1.241.93 2.296a.4.4 0 0 0 .796 0c.09-1.038.413-1.792.93-2.308.515-.516 1.269-.839 2.306-.928a.4.4 0 0 0 .001-.797c-1.055-.094-1.792-.418-2.296-.93-.506-.516-.823-1.27-.941-2.317Z"
+                          />
+                          <path
+                            fill="#ffffff"
+                            d="M12.001 1.5a1 1 0 0 1 .993.887c.313 2.77 1.153 4.775 2.5 6.146 1.34 1.366 3.3 2.223 6.095 2.47a1 1 0 0 1-.003 1.993c-2.747.238-4.75 1.094-6.123 2.467-1.373 1.374-2.229 3.376-2.467 6.123a1 1 0 0 1-1.992.003c-.248-2.795-1.105-4.754-2.47-6.095-1.372-1.347-3.376-2.187-6.147-2.5a1 1 0 0 1-.002-1.987c2.818-.325 4.779-1.165 6.118-2.504 1.339-1.34 2.179-3.3 2.504-6.118A1 1 0 0 1 12 1.5ZM6.725 11.998c1.234.503 2.309 1.184 3.21 2.069.877.861 1.56 1.888 2.063 3.076.5-1.187 1.18-2.223 2.051-3.094.871-.87 1.907-1.55 3.094-2.05-1.188-.503-2.215-1.187-3.076-2.064-.885-.901-1.566-1.976-2.069-3.21-.505 1.235-1.19 2.3-2.081 3.192-.891.89-1.957 1.576-3.192 2.082Z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="flex-col">
+                      <div className="text-white text-[14px] font-roboto-regular">
+                        ChatGPT Plus
+                      </div>
+
+                      <div>
+                        <p className="text-[#b4b4b4] text-[12px] font-roboto-regular leading-[16px]">
+                          Model kami yang paling cerdas & lainnya
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center">
+                      <div className="">
+                        <span className="rounded-full border-[1px] border-[#4e4e4e] bg-[#2f2f2f] hover:bg-[#424242] text-[14px] text-white font-roboto-bold py-[5px] px-[13px]">
+                          Upgrade
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* 1. ===== */}
+
+                {/* 2. ===== */}
+                <div className="flex justify-between ml-[9px] mr-[9px] mb-[4px] hover:bg-[#424242] rounded-[6px] cursor-pointer">
+                  <div className="p-[12px] flex">
+                    <div className="flex">
+                      <div className="flex pr-[12px]">
+                        <div className="w-[28px] h-[28px] bg-[#424242] rounded-full flex items-center justify-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="#ffffff"
+                              fill-rule="evenodd"
+                              d="M12 7.42a22 22 0 0 0-2.453 2.127A22 22 0 0 0 7.42 12a22 22 0 0 0 2.127 2.453c.807.808 1.636 1.52 2.453 2.128a22 22 0 0 0 2.453-2.128A22 22 0 0 0 16.58 12a22 22 0 0 0-2.127-2.453A22 22 0 0 0 12 7.42m1.751-1.154a25 25 0 0 1 2.104 1.88 25 25 0 0 1 1.88 2.103c.316-.55.576-1.085.779-1.59.35-.878.507-1.625.503-2.206-.003-.574-.16-.913-.358-1.111-.199-.199-.537-.356-1.112-.36-.58-.003-1.328.153-2.205.504-.506.203-1.04.464-1.59.78Zm3.983 7.485a25 25 0 0 1-1.88 2.104 25 25 0 0 1-2.103 1.88 13 13 0 0 0 1.59.779c.878.35 1.625.507 2.206.503.574-.003.913-.16 1.111-.358.199-.199.356-.538.36-1.112.003-.58-.154-1.328-.504-2.205a13 13 0 0 0-.78-1.59ZM12 18.99c.89.57 1.768 1.03 2.605 1.364 1.026.41 2.036.652 2.955.646.925-.006 1.828-.267 2.5-.94.673-.672.934-1.575.94-2.5.006-.919-.236-1.929-.646-2.954A15.7 15.7 0 0 0 18.99 12a15.6 15.6 0 0 0 1.364-2.606c.41-1.025.652-2.035.646-2.954-.006-.925-.267-1.828-.94-2.5-.672-.673-1.575-.934-2.5-.94-.919-.006-1.929.235-2.954.646-.838.335-1.716.795-2.606 1.364a15.7 15.7 0 0 0-2.606-1.364C8.37 3.236 7.36 2.994 6.44 3c-.925.006-1.828.267-2.5.94-.673.672-.934 1.575-.94 2.5-.006.919.235 1.929.646 2.955A15.7 15.7 0 0 0 5.01 12c-.57.89-1.03 1.768-1.364 2.605-.41 1.026-.652 2.036-.646 2.955.006.925.267 1.828.94 2.5.672.673 1.575.934 2.5.94.92.006 1.93-.235 2.955-.646A15.7 15.7 0 0 0 12 18.99m-1.751-1.255a25 25 0 0 1-2.104-1.88 25 25 0 0 1-1.88-2.104c-.315.55-.576 1.085-.779 1.59-.35.878-.507 1.625-.503 2.206.003.574.16.913.359 1.111.198.199.537.356 1.111.36.58.003 1.328-.153 2.205-.504.506-.203 1.04-.463 1.59-.78Zm-3.983-7.486a25 25 0 0 1 1.88-2.104 25 25 0 0 1 2.103-1.88 13 13 0 0 0-1.59-.779c-.878-.35-1.625-.507-2.206-.503-.574.003-.913.16-1.111.359-.199.198-.356.537-.36 1.111-.003.58.153 1.328.504 2.205.203.506.464 1.04.78 1.59Z"
+                              clip-rule="evenodd"
+                            ></path>
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="flex-col">
+                        <div className="text-white text-[14px] font-roboto-regular">
+                          ChatGPT
+                        </div>
+
+                        <div>
+                          <p className="text-[#b4b4b4] text-[12px] font-roboto-regular leading-[16px]">
+                            Cocot untuk tugas sehari-hari
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-[12px] flex items-center">
+                    <div className="flex items-center ">
+                      <div className="">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="#ffffff"
+                            fill-rule="evenodd"
+                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12m14.076-4.068a1 1 0 0 1 .242 1.393l-4.75 6.75a1 1 0 0 1-1.558.098l-2.5-2.75a1 1 0 0 1 1.48-1.346l1.66 1.827 4.032-5.73a1 1 0 0 1 1.394-.242"
+                            clip-rule="evenodd"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* 2. ===== */}
+
+                <div className="flex mx-[21px] w-[298px] h-[1px] bg-[#444444]"></div>
+                {/* 3. ===== */}
+                <div className="flex justify-between mt-[4px] ml-[9px] mr-[9px] mb-[9px] hover:bg-[#424242] rounded-[6px] cursor-pointer">
+                  <div className="p-[9px] flex">
+                    <div className="flex items-center ml-[3px]">
+                      <div className="flex pr-[12px]">
+                        <div className="w-[28px] h-[28px] rounded-full flex items-center justify-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="#ffffff"
+                              fill-rule="evenodd"
+                              d="M10.974 3.252a1 1 0 0 1-.746 1.201 7.74 7.74 0 0 0-3.876 2.24 1 1 0 1 1-1.458-1.37 9.74 9.74 0 0 1 4.878-2.817 1 1 0 0 1 1.202.746m2.052 0a1 1 0 0 1 1.202-.746 9.74 9.74 0 0 1 4.878 2.818 1 1 0 1 1-1.458 1.37 7.74 7.74 0 0 0-3.876-2.24 1 1 0 0 1-.746-1.202M3.91 8.514a1 1 0 0 1 .67 1.246A7.8 7.8 0 0 0 4.25 12c0 .774.113 1.53.325 2.25a1 1 0 0 1-1.92.564A10 10 0 0 1 2.25 12c0-.978.144-1.924.413-2.817a1 1 0 0 1 1.246-.669m16.182 0a1 1 0 0 1 1.246.67c.269.892.413 1.838.413 2.816a10 10 0 0 1-.406 2.813 1 1 0 0 1-1.919-.564A8 8 0 0 0 19.75 12a7.8 7.8 0 0 0-.328-2.24 1 1 0 0 1 .669-1.246m-.982 8.768a1 1 0 0 1 .086 1.412c-1.293 1.462-3.006 2.551-4.955 3.033a1 1 0 1 1-.48-1.941c1.53-.379 2.895-1.24 3.938-2.418a1 1 0 0 1 1.411-.086m-12.937-.008a1 1 0 0 1 .293 1.384L5.593 20H10a1 1 0 1 1 0 2H3.75a1 1 0 0 1-.838-1.545l1.876-2.887a1 1 0 0 1 1.384-.294"
+                              clip-rule="evenodd"
+                            ></path>
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="text-white text-[14px] font-roboto-regular">
+                          Obrolan sementara
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="p-[12px] flex items-center"
+                    onClick={tempChatClick}
+                  >
+                    <div className="flex items-center ">
+                      <div
+                        className={`w-[32px] h-[20px] rounded-full border-[1px] border-[#4b4b4b] relative flex items-center ${
+                          isTempChat ? "bg-[#10A37F]" : "bg-transparent"
+                        } transition duration-200`}
+                      >
+                        <div
+                          className={`absolute w-[16px] left-0 h-[16px] bg-[white] rounded-full p-[2px] ${
+                            isTempChat
+                              ? "translate-x-[14px]"
+                              : "translate-x-[0px]"
+                          } transition duration-200`}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* 3. ===== */}
               </div>
             )}
             <div
