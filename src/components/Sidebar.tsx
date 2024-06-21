@@ -9,11 +9,11 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`bg-[#171717] h-screen transition-all duration-300 flex-none flex-col ${
+      className={`bg-[#171717] h-screen transition-all duration-300 flex-none flex-col  ${
         isOpen ? "w-[0px]" : "w-[260px]"
       }`}
     >
-      <div className={`w-[260px]`}>
+      <div className={`w-[260px] `}>
         {/* Icon Top */}
         <div className="flex justify-between mx-[12px] pt-[8px] pb-[8px]">
           <div className="w-[40px] h-[40px] hover:bg-[#212121] p-[8px] rounded-[8px] cursor-pointer ">
@@ -46,7 +46,7 @@ export default function Sidebar() {
         </div>
         {/* Icon Top End */}
 
-        <div className="flex-col pt-[20px] ml-[12px] mr-[8px] flex-none">
+        <div className="flex-col pt-[20px] ml-[12px] mr-[5px] flex-none h-[86vh] overflow-auto">
           <div>
             <div className="pl-[8px] pr-[8px] pb-[8px] pt-[12px]">
               <span className="text-[12px] text-[#b4b4b4] font-roboto-bold">
@@ -81,6 +81,51 @@ export default function Sidebar() {
                 7 Hari Sebelumnya
               </span>
             </div>
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
+            <ConversationTitle />
             <ConversationTitle />
             <ConversationTitle />
             <ConversationTitle />
