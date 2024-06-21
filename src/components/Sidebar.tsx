@@ -16,13 +16,12 @@ export default function Sidebar() {
   const popUpRef = useRef(null);
   const [isHoverLocation, setIsHoverLocation] = useState(0);
 
-  const handlePopUpClick = (event) => {
+  const handlePopUpOption = (event) => {
     const { clientX, clientY } = event;
     setIsHoverLocation(clientY);
-    handleClickOption(false);
+    /*   handleClickOption(false); */
   };
 
-  /*
   const handleClickOutside = (event) => {
     if (!popUpRef.current.contains(event.target)) {
       handleClickOption(false);
@@ -39,7 +38,7 @@ export default function Sidebar() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isOptionClick]); */
+  }, [isOptionClick]);
 
   return (
     <div
@@ -116,19 +115,19 @@ export default function Sidebar() {
                 7 Hari Sebelumnya
               </span>
             </div>
-            <div ref={conversationRef} /* onClick={handleMouseOver} */>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
               <ConversationTitle />
             </div>
-            <div ref={conversationRef} /* onClick={handleMouseOver} */>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
               <ConversationTitle />
             </div>
-            <div ref={conversationRef} /* onClick={handleMouseOver} */>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
               <ConversationTitle />
             </div>
-            <div ref={conversationRef} /* onClick={handleMouseOver} */>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
               <ConversationTitle />
             </div>
-            <div ref={conversationRef} /* onClick={handleMouseOver} */>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
               <ConversationTitle />
             </div>
           </div>
@@ -140,7 +139,7 @@ export default function Sidebar() {
           className={`absolute bg-[#2f2f2f] h-auto flex-col left-[170px] rounded-[16px] border-[1px] border-[#444444] z-[999] ${
             !isOptionClick ? "hidden" : ""
           }`}
-          /*     style={{ top: `${isHoverLocation}px` }} */
+          style={{ top: `${isHoverLocation}px` }}
           ref={popUpRef}
         >
           <div className="flex mt-[9px] mr-[9px] ml-[9px] p-[12px]">
