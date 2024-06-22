@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSidebar } from "@/contexts/SidebarContext";
 import ConversationTitle from "./ConversationTitle";
+import PricingCard from "./PricingCard";
 
 export default function Sidebar() {
   const {
@@ -16,6 +17,80 @@ export default function Sidebar() {
   const popUpRef = useRef(null);
   const [isHoverLocation, setIsHoverLocation] = useState(0);
   const [showPricing, setShowPricing] = useState(false);
+
+  const pricingCards = [
+    {
+      id: 1,
+      isLogo: null,
+      type: "Free",
+      price: "USD $0/bulan",
+      buttonTitle: "Paket Anda saat ini",
+      buttonColor: "",
+      features: [
+        {
+          id: 1,
+          name: "Bantuan untuk menulis, memecahkan masalah, dan lainnya",
+        },
+        { id: 2, name: "Akses ke GPT-3.5" },
+        { id: 3, name: "Akses terbatas ke GPT‑4o" },
+        {
+          id: 4,
+          name: "Akses terbatas ke analisis data tingkat lanjut, pengunggahan file, visual, penelusuran web, dan GPT khusus",
+        },
+      ],
+      termCondition: 1,
+    },
+    {
+      id: 2,
+      isLogo: "stars",
+      type: "Plus",
+      price: "USD $20/bulan",
+      buttonTitle: "Upgrade ke Plus",
+      buttonColor: "#14a47c",
+      features: [
+        {
+          id: 1,
+          name: "Akses dini ke fitur baru",
+        },
+        { id: 2, name: "Akses ke GPT-4, GPT‑4o, GPT-3.5" },
+        { id: 3, name: "Up to 5x more messages for GPT‑4o" },
+        {
+          id: 4,
+          name: "Akses ke analisis data tingkat lanjut, unggahan file, visi, dan penjelajahan web",
+        },
+        {
+          id: 5,
+          name: "Pembuatan gambar DALL·E",
+        },
+        {
+          id: 6,
+          name: "Buat dan gunakan GPT khusus",
+        },
+      ],
+      termCondition: 2,
+    },
+    {
+      id: 3,
+      isLogo: "people",
+      type: "Team",
+      price: "USD $25 per orang/bulan*",
+      buttonTitle: "Upgrade ke Team",
+      buttonColor: "#14a47c",
+      features: [
+        {
+          id: 1,
+          name: "Batas yang lebih tinggi untuk GPT-4, GPT‑4o, dan alat bantu seperti pembuatan gambar DALL·E, analisis data tingkat lanjut, penelusuran web, dan lainnya",
+        },
+        { id: 2, name: "Buat dan berbagi GPT dengan workspace Anda" },
+        { id: 3, name: "Konsol admin untuk manajemen workspace" },
+        {
+          id: 4,
+          name: "Data Team dikecualikan dari pelatihan secara default. Pelajari selengkapnya",
+        },
+      ],
+      termCondition: 3,
+    },
+  ];
 
   const handleOpenPricing = () => {
     setShowPricing(true);
@@ -233,15 +308,29 @@ export default function Sidebar() {
         </div>
 
         {showPricing && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[999] ">
-            <div className="bg-white p-[50px] rounded shadow-lg w-[1024px] h-[614px]">
-              <span>ANJAY</span>
-              <button
-                className="absolute top-2 right-2 text-gray-600"
-                onClick={handleClosePricing}
-              >
-                &times;
-              </button>
+          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[999]">
+            <div className="bg-[#2f2f2f] rounded shadow-lg w-[1024px] h-[614px] flex-col">
+              <div className="pt-[26px] pb-[27px] px-[32px] border-b-[1px] border-b-[#444444]">
+                <span className="text-white font-semibold text-[20px] leading-[28px]">
+                  Upgrade paket Anda
+                </span>
+              </div>
+              <div className="flex">
+                {pricingCards.map((pricingCard) => (
+                  <div key={pricingCard.id}>
+                    <PricingCard
+                      id={pricingCard.id}
+                      isLogo={pricingCard.isLogo}
+                      type={pricingCard.type}
+                      price={pricingCard.price}
+                      buttonTitle={pricingCard.buttonTitle}
+                      buttonColor={pricingCard.buttonColor}
+                      features={pricingCard.features}
+                      termCondition={pricingCard.termCondition}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
