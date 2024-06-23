@@ -125,12 +125,12 @@ export default function Sidebar() {
   }, [isOptionClick]);
 
   return (
-    <div
-      className={`bg-[#171717] h-screen transition-all duration-300 flex-none flex-col  ${
+    <nav
+      className={`bg-[#171717] h-screen transition-all duration-300 flex-none   ${
         isOpen ? "w-[0px]" : "w-[260px]"
       }`}
     >
-      <div className={`w-[260px] `}>
+      <div className={`w-[260px] flex flex-col h-[100vh]`}>
         {/* Icon Top */}
         <div className="flex justify-between mx-[12px] pt-[8px] pb-[8px]">
           <div className="w-[40px] h-[40px] hover:bg-[#212121] p-[8px] rounded-[8px] cursor-pointer ">
@@ -164,7 +164,32 @@ export default function Sidebar() {
         {/* Icon Top End */}
 
         {/* Conversation */}
-        <div className="flex-col pt-[20px] ml-[12px] mr-[5px] flex-none h-[86vh] overflow-auto">
+        {/*  <div className="flex flex-col gap-[2px] h-[90vh]">
+          <div className="bg-white w-14 h-14 mt-[2px]"></div>
+          <div className="bg-white grow w-14 h-14 mt-[2px] flex flex-col overflow-auto">
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+            <span>asdasdasd</span>
+          </div>
+          <div className="bg-white w-14 h-14 mt-[2px]"></div>
+        </div> */}
+        <div className="flex-col pt-[20px] ml-[12px] mr-[5px] grow overflow-auto">
           <div>
             <div className="pl-[8px] pr-[8px] pb-[8px] pt-[12px]">
               <span className="text-[12px] text-[#b4b4b4] font-roboto-bold">
@@ -274,7 +299,7 @@ export default function Sidebar() {
 
         {/* Bottom Pricing */}
         <div
-          className="hover:bg-[#212121] rounded-[8px] mt-[8px] mx-[12px] mb-[8px] py-[8px] px-[8px] cursor-pointer"
+          className="flex hover:bg-[#212121] rounded-[8px] mt-[8px] mx-[12px] mb-[8px] py-[8px] px-[8px] cursor-pointer items-end"
           onClick={handleOpenPricing}
         >
           <div className="flex items-center">
@@ -404,6 +429,6 @@ export default function Sidebar() {
         </div>
         {/* Pop up Option End */}
       </div>
-    </div>
+    </nav>
   );
 }
