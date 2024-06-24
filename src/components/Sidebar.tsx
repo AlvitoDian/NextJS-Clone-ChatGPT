@@ -75,7 +75,7 @@ export default function Sidebar() {
       type: "Team",
       price: "USD $25 per orang/bulan*",
       buttonTitle: "Upgrade ke Team",
-      buttonColor: "#14a47c",
+      buttonColor: "#0066DE",
       features: [
         {
           id: 1,
@@ -219,10 +219,74 @@ export default function Sidebar() {
           </div>
 
           <div className="mt-[20px]">
-            <div className="pl-[8px] pr-[8px] pb-[8px] pt-[12px]">
+            <div className="bg-[#171717] pl-[8px] pr-[8px] pb-[8px] pt-[12px] sticky top-[-20px] z-[888]">
               <span className="text-[12px] text-[#b4b4b4] font-roboto-bold">
                 7 Hari Sebelumnya
               </span>
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+          </div>
+          <div className="mt-[20px]">
+            <div className="bg-[#171717] pl-[8px] pr-[8px] pb-[8px] pt-[12px] sticky top-[-20px] z-[888]">
+              <span className="text-[12px] text-[#b4b4b4] font-roboto-bold">
+                30 Hari Sebelumnya
+              </span>
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
+            </div>
+            <div ref={conversationRef} onClick={handlePopUpOption}>
+              <ConversationTitle />
             </div>
             <div ref={conversationRef} onClick={handlePopUpOption}>
               <ConversationTitle />
@@ -335,10 +399,30 @@ export default function Sidebar() {
         {showPricing && (
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[999]">
             <div className="bg-[#2f2f2f] rounded shadow-lg w-[1024px] h-[614px] flex-col">
-              <div className="pt-[26px] pb-[27px] px-[32px] border-b-[1px] border-b-[#444444]">
-                <span className="text-white font-semibold text-[20px] leading-[28px]">
-                  Upgrade paket Anda
-                </span>
+              <div className="pt-[26px] pb-[27px] px-[32px] border-b-[1px] border-b-[#444444] flex items-center justify-between">
+                <div>
+                  <span className="text-white font-semibold text-[20px] leading-[28px]">
+                    Upgrade paket Anda
+                  </span>
+                </div>
+                <div className="cursor-pointer" onClick={handleClosePricing}>
+                  <div className="w-[32px] h-[32px] rounded-full flex items-center justify-center hover:bg-[#676767]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="#e3e3e3"
+                        fill-rule="evenodd"
+                        d="M5.636 5.636a1 1 0 0 1 1.414 0l4.95 4.95 4.95-4.95a1 1 0 0 1 1.414 1.414L13.414 12l4.95 4.95a1 1 0 0 1-1.414 1.414L12 13.414l-4.95 4.95a1 1 0 0 1-1.414-1.414l4.95-4.95-4.95-4.95a1 1 0 0 1 0-1.414"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
               </div>
               <div className="flex">
                 {pricingCards.map((pricingCard) => (
@@ -355,6 +439,15 @@ export default function Sidebar() {
                     />
                   </div>
                 ))}
+              </div>
+
+              <div className="flex justify-center items-center border-t-[1px] border-t-[#444444]">
+                <div className="text-[14px] py-[25px] font-roboto-regular text-[#f9f9f9]">
+                  Perlu kemampuan lebih?{" "}
+                  <a href="#" className="underline">
+                    Lihat ChatGPT Enterprise
+                  </a>
+                </div>
               </div>
             </div>
           </div>
