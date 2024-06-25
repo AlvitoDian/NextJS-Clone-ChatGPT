@@ -11,14 +11,8 @@ export async function getGeminiAIResponse(question) {
     const result = await model.generateContent(question);
     const response = await result.response;
     const text = response.text();
-    console.log(text);
 
-    /*   const chatCompletion = await openai.chat.completions.create({
-      messages: [{ role: "user", content: "Say this is a test" }],
-      model: "gpt-3.5-turbo",
-    });
-
-    return chatCompletion; */
+    return text;
   } catch (error) {
     console.error("Error fetching GenAI response:", error);
     throw new Error("Failed to fetch response from GenAI");

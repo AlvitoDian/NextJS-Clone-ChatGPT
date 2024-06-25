@@ -1,7 +1,18 @@
-export default function Answer() {
+export default function Answer({ content }) {
+  const renderWithBold = (text) => {
+    const parts = text.split(/(\*\*[^*]+\*\*)/g).filter(Boolean);
+    return parts.map((part, index) =>
+      part.startsWith("**") && part.endsWith("**") ? (
+        <strong key={index}>{part.slice(2, -2)}</strong>
+      ) : (
+        part
+      )
+    );
+  };
+
   return (
-    <div className="flex justify-center mt-[39px]">
-      <div className="w-[768px] bg-transparent flex items-start">
+    <div className="flex justify-center mx-[12px] mt-[39px]">
+      <div className="w-full max-w-[768px] bg-transparent flex items-start">
         <div className="flex mr-[24px]">
           <div className="flex justify-center items-center w-[32px] h-[32px] rounded-full border-[1px] border-[#3D3D3D]">
             <svg
@@ -25,17 +36,7 @@ export default function Answer() {
 
         <div className="flex mt-[3px]">
           <div className="text-[#ececec] text-[16px]">
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis
-              veritatis provident, nemo sint libero repudiandae inventore
-              aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum
-              nesciunt velit nam voluptates accusantium?
-            </p>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Doloribus dignissimos molestias corrupti aperiam dolorum explicabo
-              consequatur laboriosam nam adipisci dolore!
-            </p>
+            <p>{content}</p>
           </div>
         </div>
       </div>

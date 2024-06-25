@@ -163,32 +163,6 @@ export default function Sidebar() {
         </div>
         {/* Icon Top End */}
 
-        {/* Conversation */}
-        {/*  <div className="flex flex-col gap-[2px] h-[90vh]">
-          <div className="bg-white w-14 h-14 mt-[2px]"></div>
-          <div className="bg-white grow w-14 h-14 mt-[2px] flex flex-col overflow-auto">
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-            <span>asdasdasd</span>
-          </div>
-          <div className="bg-white w-14 h-14 mt-[2px]"></div>
-        </div> */}
         <div className="flex-col pt-[20px] ml-[12px] mr-[5px] grow overflow-auto">
           <div>
             <div className="pl-[8px] pr-[8px] pb-[8px] pt-[12px]">
@@ -219,7 +193,7 @@ export default function Sidebar() {
           </div>
 
           <div className="mt-[20px]">
-            <div className="bg-[#171717] pl-[8px] pr-[8px] pb-[8px] pt-[12px] sticky top-[-20px] z-[888]">
+            <div className="bg-[#171717] pl-[8px] pr-[8px] pb-[8px] pt-[12px] sticky top-[-20px] z-[10]">
               <span className="text-[12px] text-[#b4b4b4] font-roboto-bold">
                 7 Hari Sebelumnya
               </span>
@@ -250,7 +224,7 @@ export default function Sidebar() {
             </div>
           </div>
           <div className="mt-[20px]">
-            <div className="bg-[#171717] pl-[8px] pr-[8px] pb-[8px] pt-[12px] sticky top-[-20px] z-[888]">
+            <div className="bg-[#171717] pl-[8px] pr-[8px] pb-[8px] pt-[12px] sticky top-[-20px] z-[10]">
               <span className="text-[12px] text-[#b4b4b4] font-roboto-bold">
                 30 Hari Sebelumnya
               </span>

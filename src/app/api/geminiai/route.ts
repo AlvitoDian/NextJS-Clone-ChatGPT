@@ -8,9 +8,12 @@ export async function POST(request: Request, question: any) {
     console.log("Question received: ", question);
 
     const answer = await getGeminiAIResponse(question);
-    console.log("Answer: ", answer);
 
-    return NextResponse.json({ message: "Hello, Next.js!", question });
+    return NextResponse.json({
+      message: "Success",
+      from: "geminiai",
+      content: answer,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to handle request" },
