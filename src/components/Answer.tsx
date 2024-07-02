@@ -11,7 +11,7 @@ export default function Answer({ content }) {
   };
 
   return (
-    <div className="flex justify-center mx-[12px] mt-[39px]">
+    <div className="flex justify-center mx-[12px] mt-[39px] mb-[20px]">
       <div className="w-full max-w-[768px] bg-transparent flex items-start">
         <div className="flex mr-[24px]">
           <div className="flex justify-center items-center w-[32px] h-[32px] rounded-full border-[1px] border-[#3D3D3D]">
@@ -36,7 +36,7 @@ export default function Answer({ content }) {
 
         <div className="flex mt-[3px]">
           <div className="text-[#ececec] text-[16px]">
-            <p>{content}</p>
+            <p>{renderWithBold(content)}</p>
           </div>
         </div>
       </div>

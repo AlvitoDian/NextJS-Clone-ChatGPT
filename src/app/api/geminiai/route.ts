@@ -5,8 +5,6 @@ export async function POST(request: Request, question: any) {
   try {
     const { question } = await request.json();
 
-    console.log("Question received: ", question);
-
     const answer = await getGeminiAIResponse(question);
 
     return NextResponse.json({

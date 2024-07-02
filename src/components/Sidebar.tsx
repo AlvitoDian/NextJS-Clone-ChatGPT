@@ -15,8 +15,10 @@ export default function Sidebar() {
   } = useSidebar();
   const conversationRef = useRef(null);
   const popUpRef = useRef(null);
+  const scrollConversation = useRef(null);
   const [isHoverLocation, setIsHoverLocation] = useState(0);
   const [showPricing, setShowPricing] = useState(false);
+  const [optionPosition, setOptionPosition] = useState(null);
 
   const pricingCards = [
     {
@@ -101,10 +103,40 @@ export default function Sidebar() {
   };
 
   const handlePopUpOption = (event) => {
-    const { clientX, clientY } = event;
+    console.log(event.clientY, "clientY");
+    setOptionPosition(event.clientY);
+    const { clientY } = event;
     setIsHoverLocation(clientY);
-    /*   handleClickOption(false); */
   };
+
+  /*   useEffect(() => {
+    const scrollElement = scrollConversation.current;
+
+    const handleScroll = () => {
+      if (scrollElement) {
+        const currentScrollPos = scrollElement.scrollTop;
+
+        scroll;
+        if (currentScrollPos > optionPosition) {
+          setIsHoverLocation((prevPosition) => prevPosition + 1);
+        } else if (currentScrollPos < optionPosition) {
+          setIsHoverLocation((prevPosition) => prevPosition - 1);
+        }
+
+        setOptionPosition(currentScrollPos);
+      }
+    };
+
+    if (scrollElement) {
+      scrollElement.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (scrollElement) {
+        scrollElement.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []); */
 
   const handleClickOutside = (event) => {
     if (!popUpRef.current.contains(event.target)) {
@@ -126,7 +158,7 @@ export default function Sidebar() {
 
   return (
     <nav
-      className={`bg-[#171717] h-screen transition-all duration-300 flex-none   ${
+      className={`bg-[#171717] h-screen transition-all duration-300 flex-none hidden md:block ${
         isOpen ? "w-[0px]" : "w-[260px]"
       }`}
     >
@@ -163,7 +195,12 @@ export default function Sidebar() {
         </div>
         {/* Icon Top End */}
 
-        <div className="flex-col pt-[20px] ml-[12px] mr-[5px] grow overflow-auto">
+        {/* Conversation */}
+        <div
+          className="flex-col pt-[20px] ml-[12px] mr-[5px] grow overflow-auto"
+          id="style-scrollbar"
+          ref={scrollConversation}
+        >
           <div>
             <div className="pl-[8px] pr-[8px] pb-[8px] pt-[12px]">
               <span className="text-[12px] text-[#b4b4b4] font-roboto-bold">
@@ -223,6 +260,7 @@ export default function Sidebar() {
               <ConversationTitle />
             </div>
           </div>
+
           <div className="mt-[20px]">
             <div className="bg-[#171717] pl-[8px] pr-[8px] pb-[8px] pt-[12px] sticky top-[-20px] z-[10]">
               <span className="text-[12px] text-[#b4b4b4] font-roboto-bold">
@@ -436,7 +474,7 @@ export default function Sidebar() {
           style={{ top: `${isHoverLocation}px` }}
           ref={popUpRef}
         >
-          <div className="flex mt-[9px] mr-[9px] ml-[9px] p-[12px]">
+          <div className="flex mt-[9px] mr-[9px] ml-[9px] p-[12px] hover:bg-[#424242] cursor-pointer rounded-[6px]">
             <div className="mr-[13px]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -452,10 +490,12 @@ export default function Sidebar() {
               </svg>
             </div>
             <div>
-              <span className="font-roboto-regular text-white">Bagikan</span>
+              <span className="font-roboto-regular text-white text-[14px]">
+                Bagikan
+              </span>
             </div>
           </div>
-          <div className="flex mr-[9px] ml-[9px] p-[12px]">
+          <div className="flex mr-[9px] ml-[9px] p-[12px] hover:bg-[#424242] cursor-pointer rounded-[6px]">
             <div className="mr-[13px]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -466,15 +506,17 @@ export default function Sidebar() {
               >
                 <path
                   fill="#e3e3e3"
-                  d="M11.293 3.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 6.414V15a1 1 0 1 1-2 0V6.414L8.707 8.707a1 1 0 0 1-1.414-1.414zM4 14a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3a1 1 0 1 1 2 0v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3a1 1 0 0 1 1-1"
+                  d="M13.293 4.293a4.536 4.536 0 1 1 6.414 6.414l-1 1-7.094 7.094A5 5 0 0 1 8.9 20.197l-4.736.79a1 1 0 0 1-1.15-1.151l.789-4.736a5 5 0 0 1 1.396-2.713zM13 7.414l-6.386 6.387a3 3 0 0 0-.838 1.628l-.56 3.355 3.355-.56a3 3 0 0 0 1.628-.837L16.586 11zm5 2.172L14.414 6l.293-.293a2.536 2.536 0 0 1 3.586 3.586z"
                 ></path>
               </svg>
             </div>
             <div>
-              <span className="font-roboto-regular text-white">Bagikan</span>
+              <span className="font-roboto-regular text-white text-[14px]">
+                Ganti nama
+              </span>
             </div>
           </div>
-          <div className="flex mb-[9px] mr-[9px] ml-[9px] p-[12px]">
+          <div className="flex mr-[9px] ml-[9px] p-[12px] hover:bg-[#424242] cursor-pointer rounded-[6px]">
             <div className="mr-[13px]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -485,12 +527,35 @@ export default function Sidebar() {
               >
                 <path
                   fill="#e3e3e3"
-                  d="M11.293 3.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L13 6.414V15a1 1 0 1 1-2 0V6.414L8.707 8.707a1 1 0 0 1-1.414-1.414zM4 14a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3a1 1 0 1 1 2 0v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3a1 1 0 0 1 1-1"
+                  d="M4.83 4.106A2 2 0 0 1 6.617 3h10.764a2 2 0 0 1 1.789 1.106l1.618 3.236a2 2 0 0 1 .211.894V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8.236a2 2 0 0 1 .211-.894zM17.381 5H6.618l-1 2h12.764zM19 9H5v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM9 12a1 1 0 0 1 1-1h4a1 1 0 1 1 0 2h-4a1 1 0 0 1-1-1"
                 ></path>
               </svg>
             </div>
             <div>
-              <span className="font-roboto-regular text-white">Bagikan</span>
+              <span className="font-roboto-regular text-white text-[14px]">
+                Arsipkan
+              </span>
+            </div>
+          </div>
+          <div className="flex mb-[9px] mr-[9px] ml-[9px] p-[12px] hover:bg-[#424242] cursor-pointer rounded-[6px]">
+            <div className="mr-[13px]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#f93a37"
+                  d="M10.556 4a1 1 0 0 0-.97.751l-.292 1.14h5.421l-.293-1.14A1 1 0 0 0 13.453 4zm6.224 1.892-.421-1.639A3 3 0 0 0 13.453 2h-2.897A3 3 0 0 0 7.65 4.253l-.421 1.639H4a1 1 0 1 0 0 2h.1l1.215 11.425A3 3 0 0 0 8.3 22H15.7a3 3 0 0 0 2.984-2.683l1.214-11.425H20a1 1 0 1 0 0-2zm1.108 2H6.112l1.192 11.214A1 1 0 0 0 8.3 20H15.7a1 1 0 0 0 .995-.894zM10 10a1 1 0 0 1 1 1v5a1 1 0 1 1-2 0v-5a1 1 0 0 1 1-1m4 0a1 1 0 0 1 1 1v5a1 1 0 1 1-2 0v-5a1 1 0 0 1 1-1"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <span className="font-roboto-regular text-[#f93a37] text-[14px]">
+                Hapus
+              </span>
             </div>
           </div>
         </div>
