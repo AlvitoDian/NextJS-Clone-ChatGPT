@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useSidebar } from "@/contexts/SidebarContext";
 
-export default function ConversationTitle() {
+export default function ConversationTitle({ title }) {
   const [isHover, setIsHover] = useState(false);
   const { isOptionClick, handleClickOption } = useSidebar();
 
@@ -25,7 +25,7 @@ export default function ConversationTitle() {
     >
       <div className="flex items-center overflow-hidden hover:bg-[#212121] rounded-[8px] px-[8px] py-[8px] mr-[9px] cursor-pointer">
         <span className="text-[14px] text-[#ececec] font-roboto-regular flex-none">
-          Date Picker asd asd asd asda asd sda asd
+          {title}
         </span>
         <div
           className={`z-[30] absolute right-[8px] ${

@@ -7,6 +7,7 @@ import axios from "axios";
 import Answer from "./Answer";
 import NoConversationDisplay from "./NoConversationDisplay";
 import Question from "./Question";
+import AnswerLoading from "./AnswerLoading";
 
 export default function Content() {
   const { toggleSidebar, isContentHidden } = useSidebar();
@@ -101,6 +102,7 @@ export default function Content() {
   const [isOpenGPTOption, setIsOpenGPTOption] = useState(false);
   const [isOpenUserOption, setIsOpenUserOption] = useState(false);
   const [isTempChat, setIsTempChat] = useState(false);
+  const [isLoadingAnswer, setIsLoadingAnswer] = useState(false);
   const gptOptionRef = useRef(null);
   const userOptionRef = useRef(null);
   const buttonRefGPTOption = useRef(null);
@@ -186,6 +188,8 @@ export default function Content() {
 
     setText("");
 
+    setIsLoadingAnswer(true);
+
     setMessages((prevMessages) => [
       ...prevMessages,
       {
@@ -206,6 +210,7 @@ export default function Content() {
           type: "answer",
         },
       ]);
+      setIsLoadingAnswer(false);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -606,6 +611,7 @@ export default function Content() {
         ) : (
           <NoConversationDisplay />
         )}
+        {isLoadingAnswer && <AnswerLoading />}
 
         {/* Messages End */}
       </div>
