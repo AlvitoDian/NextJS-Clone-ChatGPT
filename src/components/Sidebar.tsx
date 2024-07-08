@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { useSidebar } from "@/contexts/SidebarContext";
+import { useConversation } from "@/contexts/ConversationContext";
 import ConversationTitle from "./ConversationTitle";
 import PricingCard from "./PricingCard";
 
@@ -13,28 +14,13 @@ export default function Sidebar() {
     isOptionClick,
     handleClickOption,
   } = useSidebar();
+
+  const { allConversationContext } = useConversation();
   const conversationRef = useRef(null);
   const popUpRef = useRef(null);
-  const scrollConversation = useRef(null);
   const [isHoverLocation, setIsHoverLocation] = useState(0);
   const [showPricing, setShowPricing] = useState(false);
   const [optionPosition, setOptionPosition] = useState(null);
-  const [conversationContext, setConversationContext] = useState([
-    { id: 1, title: "Memulai Proyek AI Pertamaku", date: "2024-06-26" },
-    { id: 2, title: "Ide-Inovatif untuk Aplikasi Mobile", date: "2024-06-27" },
-    { id: 3, title: "Belajar React untuk Pemula", date: "2024-06-28" },
-    { id: 4, title: "Tips Produktivitas untuk Pengembang", date: "2024-06-29" },
-    { id: 5, title: "Mengelola Tim Remote dengan Efektif", date: "2024-06-30" },
-    { id: 6, title: "Pengantar ke Machine Learning", date: "2024-07-01" },
-    {
-      id: 7,
-      title: "Meningkatkan Keterampilan Pemrograman",
-      date: "2024-07-02",
-    },
-    { id: 8, title: "Strategi Pemasaran Digital", date: "2024-06-25" },
-    { id: 9, title: "Membangun API dengan Node.js", date: "2024-05-25" },
-    { id: 10, title: "Mendesain UI/UX yang Menarik", date: "2024-04-25" },
-  ]);
 
   const pricingCards = [
     {
@@ -125,35 +111,6 @@ export default function Sidebar() {
     setIsHoverLocation(clientY);
   };
 
-  /*   useEffect(() => {
-    const scrollElement = scrollConversation.current;
-
-    const handleScroll = () => {
-      if (scrollElement) {
-        const currentScrollPos = scrollElement.scrollTop;
-
-        scroll;
-        if (currentScrollPos > optionPosition) {
-          setIsHoverLocation((prevPosition) => prevPosition + 1);
-        } else if (currentScrollPos < optionPosition) {
-          setIsHoverLocation((prevPosition) => prevPosition - 1);
-        }
-
-        setOptionPosition(currentScrollPos);
-      }
-    };
-
-    if (scrollElement) {
-      scrollElement.addEventListener("scroll", handleScroll);
-    }
-
-    return () => {
-      if (scrollElement) {
-        scrollElement.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []); */
-
   const handleClickOutside = (event) => {
     if (!popUpRef.current.contains(event.target)) {
       handleClickOption(false);
@@ -172,7 +129,7 @@ export default function Sidebar() {
     };
   }, [isOptionClick]);
 
-  const sortedConversationContext = [...conversationContext].reverse();
+  const sortedConversationContext = [...allConversationContext].reverse();
 
   return (
     <nav
@@ -217,7 +174,6 @@ export default function Sidebar() {
         <div
           className="flex-col ml-[12px] pr-[10px] mr-[5px] grow overflow-auto"
           id="style-scrollbar"
-          ref={scrollConversation}
         >
           {/* Explore and New Chat */}
           <div className="flex items-center hover:bg-[#212121] rounded-[8px] p-[8px] cursor-pointer">
@@ -294,16 +250,22 @@ export default function Sidebar() {
             </div>
           </div> */}
 
+          {/* Loop Context Conversation */}
           <div className="mt-[20px]">
+            <div className="bg-[#171717] pl-[8px] pr-[8px] pb-[8px] pt-[12px] sticky top-[-20px] z-[10]">
+              <span className="text-[12px] text-[#b4b4b4] font-roboto-bold">
+                Hari ini
+              </span>
+            </div>
             {sortedConversationContext.map((conversation, index) => (
-              <>
-                {index === 0 && (
+              <div key={conversation.id}>
+                {/*  {index === 0 && (
                   <div className="bg-[#171717] pl-[8px] pr-[8px] pb-[8px] pt-[12px] sticky top-[-20px] z-[10]">
                     <span className="text-[12px] text-[#b4b4b4] font-roboto-bold">
                       Hari ini
                     </span>
                   </div>
-                )}
+                )} */}
                 <div
                   ref={conversationRef}
                   onClick={handlePopUpOption}
@@ -311,9 +273,10 @@ export default function Sidebar() {
                 >
                   <ConversationTitle title={conversation.title} />
                 </div>
-              </>
+              </div>
             ))}
           </div>
+          {/* Loop Context Conversation End */}
 
           {/*    <div className="mt-[20px]">
             <div className="bg-[#171717] pl-[8px] pr-[8px] pb-[8px] pt-[12px] sticky top-[-20px] z-[10]">

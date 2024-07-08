@@ -5,8 +5,11 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 interface SidebarContextType {
   isOpen: boolean;
   isContentHidden: boolean;
+  isOpenMobileView: boolean;
   isOptionClick: boolean;
   toggleSidebar: () => void;
+  toggleOpenSidebarMobile: () => void;
+  toggleCloseSidebarMobile: () => void;
   handleClickOption: (state: any) => void;
 }
 
@@ -16,6 +19,7 @@ export const SidebarProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenMobileView, setIsOpenMobileView] = useState(false);
   const [isContentHidden, setIsContentHidden] = useState(false);
   const [isOptionClick, setIsOptionClick] = useState(false);
 
@@ -24,30 +28,28 @@ export const SidebarProvider: React.FC<{ children: ReactNode }> = ({
     setIsContentHidden(!isContentHidden);
   };
 
+  const toggleOpenSidebarMobile = () => {
+    setIsOpenMobileView(true);
+  };
+
+  const toggleCloseSidebarMobile = () => {
+    setIsOpenMobileView(false);
+  };
+
   const handleClickOption = (state) => {
     setIsOptionClick(state);
-    console.log(state);
   };
 
-  /*   const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-
-    if (isContentHidden) {
-      setTimeout(() => {
-        setIsContentHidden(false);
-      }, 300);
-    } else {
-      setIsContentHidden(!isContentHidden);
-    }
-  };
- */
   return (
     <SidebarContext.Provider
       value={{
         isOpen,
+        isOpenMobileView,
         isContentHidden,
         isOptionClick,
         toggleSidebar,
+        toggleOpenSidebarMobile,
+        toggleCloseSidebarMobile,
         handleClickOption,
       }}
     >

@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useSidebar } from "@/contexts/SidebarContext";
+import { useConversation } from "@/contexts/ConversationContext";
 import axios from "axios";
 import Answer from "./Answer";
 import NoConversationDisplay from "./NoConversationDisplay";
@@ -10,94 +11,20 @@ import Question from "./Question";
 import AnswerLoading from "./AnswerLoading";
 
 export default function Content() {
-  const { toggleSidebar, isContentHidden } = useSidebar();
+  const {
+    toggleSidebar,
+    isContentHidden,
+    toggleOpenSidebarMobile,
+    isOpenMobileView,
+  } = useSidebar();
+  const {
+    allConversationContext,
+    addConversation,
+    thisConversationContext,
+    setThisConversation,
+  } = useConversation();
   const [text, setText] = useState("");
-  const [messages, setMessages] = useState([
-    /* {
-      id: 1,
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis veritatis provident, nemo sint libero repudiandae inventore aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum nesciunt velit nam voluptates accusantium?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dignissimos molestias corrupti aperiam dolorum explicabo consequatur laboriosam nam adipisci dolore!",
-      type: "answer",
-    },
-    {
-      id: 2,
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis veritatis provident, nemo sint libero repudiandae inventore aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum nesciunt velit nam voluptates",
-      type: "question",
-    },
-    {
-      id: 3,
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis veritatis provident, nemo sint libero repudiandae inventore aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum nesciunt velit nam voluptates accusantium?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dignissimos molestias corrupti aperiam dolorum explicabo consequatur laboriosam nam adipisci dolore!",
-      type: "answer",
-    },
-    {
-      id: 4,
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis veritatis provident, nemo sint libero repudiandae inventore aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum nesciunt velit nam voluptates accusantium?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dignissimos molestias corrupti aperiam dolorum explicabo consequatur laboriosam nam adipisci dolore!",
-      type: "answer",
-    },
-    {
-      id: 5,
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis veritatis provident, nemo sint libero repudiandae inventore aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum nesciunt velit nam voluptates accusantium?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dignissimos molestias corrupti aperiam dolorum explicabo consequatur laboriosam nam adipisci dolore!",
-      type: "answer",
-    },
-    {
-      id: 6,
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis veritatis provident, nemo sint libero repudiandae inventore aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum nesciunt velit nam voluptates accusantium?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dignissimos molestias corrupti aperiam dolorum explicabo consequatur laboriosam nam adipisci dolore!",
-      type: "answer",
-    },
-    {
-      id: 7,
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis veritatis provident, nemo sint libero repudiandae inventore aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum nesciunt velit nam voluptates accusantium?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dignissimos molestias corrupti aperiam dolorum explicabo consequatur laboriosam nam adipisci dolore!",
-      type: "answer",
-    },
-    {
-      id: 8,
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis veritatis provident, nemo sint libero repudiandae inventore aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum nesciunt velit nam voluptates accusantium?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dignissimos molestias corrupti aperiam dolorum explicabo consequatur laboriosam nam adipisci dolore!",
-      type: "answer",
-    },
-    {
-      id: 9,
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis veritatis provident, nemo sint libero repudiandae inventore aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum nesciunt velit nam voluptates accusantium?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dignissimos molestias corrupti aperiam dolorum explicabo consequatur laboriosam nam adipisci dolore!",
-      type: "answer",
-    },
-    {
-      id: 10,
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis veritatis provident, nemo sint libero repudiandae inventore aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum nesciunt velit nam voluptates accusantium?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dignissimos molestias corrupti aperiam dolorum explicabo consequatur laboriosam nam adipisci dolore!",
-      type: "answer",
-    },
-    {
-      id: 11,
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis veritatis provident, nemo sint libero repudiandae inventore aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum nesciunt velit nam voluptates accusantium?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dignissimos molestias corrupti aperiam dolorum explicabo consequatur laboriosam nam adipisci dolore!",
-      type: "answer",
-    },
-    {
-      id: 12,
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis veritatis provident, nemo sint libero repudiandae inventore aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum nesciunt velit nam voluptates accusantium?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dignissimos molestias corrupti aperiam dolorum explicabo consequatur laboriosam nam adipisci dolore!",
-      type: "answer",
-    },
-    {
-      id: 13,
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis veritatis provident, nemo sint libero repudiandae inventore aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum nesciunt velit nam voluptates accusantium?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dignissimos molestias corrupti aperiam dolorum explicabo consequatur laboriosam nam adipisci dolore!",
-      type: "answer",
-    },
-    {
-      id: 14,
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis veritatis provident, nemo sint libero repudiandae inventore aperiam quod commodi facilis ex. Explicabo voluptas voluptatum cum nesciunt velit nam voluptates accusantium?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dignissimos molestias corrupti aperiam dolorum explicabo consequatur laboriosam nam adipisci dolore!",
-      type: "answer",
-    }, */
-  ]);
+  const [messages, setMessages] = useState([]);
   const [textareaHeight, setTextareaHeight] = useState(52);
   const [isOpenGPTOption, setIsOpenGPTOption] = useState(false);
   const [isOpenUserOption, setIsOpenUserOption] = useState(false);
@@ -183,6 +110,11 @@ export default function Content() {
     setIsTempChat(!isTempChat);
   };
 
+  const handleTruncateAddConversation = (text: string) => {
+    const truncatedText = text.split(" ").slice(0, 10).join(" ");
+    return truncatedText;
+  };
+
   const handleSubmitQuestion = async (e) => {
     e.preventDefault();
 
@@ -199,9 +131,17 @@ export default function Content() {
       },
     ]);
 
+    if (thisConversationContext == null) {
+      const truncateContext = handleTruncateAddConversation(text);
+
+      addConversation({ id: 10, title: truncateContext, date: "2024-07-04" });
+    }
+
+    setThisConversation(10);
+
     try {
       const response = await axios.post("/api/geminiai", { question: text });
-      console.log("Success:", response.data);
+
       setMessages((prevMessages) => [
         ...prevMessages,
         {
@@ -216,6 +156,10 @@ export default function Content() {
     }
   };
 
+  const openSidebarMobile = async () => {
+    toggleOpenSidebarMobile();
+  };
+
   const firstDivHeight =
     textareaHeight >= 52 ? `calc(100% - ${textareaHeight}px)` : "91%";
 
@@ -223,6 +167,28 @@ export default function Content() {
     <div className="bg-[#212121] w-full h-screen transition duration-300 flex flex-col z-[30]">
       {/* Navbar */}
       <div className="sticky top-0 bg-[#212121] w-full h-[56px] flex justify-between">
+        {/* Mobile View Hamburger */}
+        <div
+          className="flex items-center md:hidden cursor-pointer"
+          onClick={openSidebarMobile}
+        >
+          <div className="w-[24px] h-[24px] my-[18px] mx-[22px]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#b4b4b4"
+                d="M3 8a1 1 0 0 1 1-1h16a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1m0 8a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1"
+              />
+            </svg>
+          </div>
+        </div>
+        {/* Mobile View Hamburger End */}
+
         <div className="flex items-center">
           <div
             className={`w-[40px] h-[40px] hover:bg-[#2f2f2f] p-[8px] rounded-[8px] cursor-pointer ml-[12px] mt-[5px] ${
@@ -436,8 +402,22 @@ export default function Content() {
         </div>
 
         <div className="flex relative">
+          {/* Mobile View */}
+          <div className="w-[24px] h-[24px] md:hidden flex items-center my-[18px] mx-[22px] cursor-pointer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="#b4b4b4"
+              viewBox="0 0 24 24"
+            >
+              <path d="M15.673 3.913a3.121 3.121 0 1 1 4.414 4.414l-5.937 5.937a5 5 0 0 1-2.828 1.415l-2.18.31a1 1 0 0 1-1.132-1.13l.311-2.18A5 5 0 0 1 9.736 9.85zm3 1.414a1.12 1.12 0 0 0-1.586 0l-5.937 5.937a3 3 0 0 0-.849 1.697l-.123.86.86-.122a3 3 0 0 0 1.698-.849l5.937-5.937a1.12 1.12 0 0 0 0-1.586M11 4A1 1 0 0 1 10 5c-.998 0-1.702.008-2.253.06-.54.052-.862.141-1.109.267a3 3 0 0 0-1.311 1.311c-.134.263-.226.611-.276 1.216C5.001 8.471 5 9.264 5 10.4v3.2c0 1.137 0 1.929.051 2.546.05.605.142.953.276 1.216a3 3 0 0 0 1.311 1.311c.263.134.611.226 1.216.276.617.05 1.41.051 2.546.051h3.2c1.137 0 1.929 0 2.546-.051.605-.05.953-.142 1.216-.276a3 3 0 0 0 1.311-1.311c.126-.247.215-.569.266-1.108.053-.552.06-1.256.06-2.255a1 1 0 1 1 2 .002c0 .978-.006 1.78-.069 2.442-.064.673-.192 1.27-.475 1.827a5 5 0 0 1-2.185 2.185c-.592.302-1.232.428-1.961.487C15.6 21 14.727 21 13.643 21h-3.286c-1.084 0-1.958 0-2.666-.058-.728-.06-1.369-.185-1.96-.487a5 5 0 0 1-2.186-2.185c-.302-.592-.428-1.233-.487-1.961C3 15.6 3 14.727 3 13.643v-3.286c0-1.084 0-1.958.058-2.666.06-.729.185-1.369.487-1.961A5 5 0 0 1 5.73 3.545c.556-.284 1.154-.411 1.827-.475C8.22 3.007 9.021 3 10 3A1 1 0 0 1 11 4" />
+            </svg>
+          </div>
+          {/* Mobile View End */}
+
           <div
-            className="w-[40px] h-[40px] mt-[8px] mr-[16px] mb-[11px] flex items-center justify-center rounded-full hover:bg-[#2f2f2f] cursor-pointer"
+            className="w-[40px] h-[40px] mt-[8px] mr-[16px] mb-[11px] flex items-center justify-center rounded-full hover:bg-[#2f2f2f] cursor-pointer hidden md:block"
             onClick={openUserOptionHandler}
             ref={buttonRefUserOption}
           >

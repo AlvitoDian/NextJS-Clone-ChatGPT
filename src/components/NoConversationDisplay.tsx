@@ -1,6 +1,15 @@
 import SuggestionConversationCard from "./SuggestionConversationCard";
+import { useState, useEffect } from "react";
 
 export default function NoConversationDisplay() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsMobile(window.innerWidth <= 640);
+    }
+  }, []);
+
   const suggestionConversations = [
     {
       id: 1,
@@ -14,9 +23,9 @@ export default function NoConversationDisplay() {
         >
           <path
             stroke="#e2c541"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="M15 19a3 3 0 1 1-6 0M15.865 16A7.54 7.54 0 0 0 19.5 9.538C19.5 5.375 16.142 2 12 2S4.5 5.375 4.5 9.538A7.54 7.54 0 0 0 8.135 16m7.73 0h-7.73m7.73 0v3h-7.73v-3"
           />
         </svg>
@@ -53,15 +62,15 @@ export default function NoConversationDisplay() {
         >
           <path
             stroke="#cb8bd0"
-            stroke-linecap="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeWidth="2"
             d="M3 6h7M3 10h4"
           />
           <path
             stroke="#cb8bd0"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="M13.428 17.572 20.5 10.5a2.828 2.828 0 1 0-4-4l-7.072 7.072a2 2 0 0 0-.547 1.022L8 19l4.406-.881a2 2 0 0 0 1.022-.547"
           />
         </svg>
@@ -87,6 +96,10 @@ export default function NoConversationDisplay() {
       desciption: "Fakta tentang Kekaisaran Romawi",
     },
   ];
+
+  const itemsToRender = isMobile
+    ? suggestionConversations.slice(0, 2)
+    : suggestionConversations;
   return (
     <div className="flex mb-[55px]">
       <div className="flex-col">
@@ -107,7 +120,7 @@ export default function NoConversationDisplay() {
         </div>
 
         <div className="flex gap-[16px] pt-[48px]">
-          {suggestionConversations.map((suggestionConversation) => (
+          {itemsToRender.map((suggestionConversation) => (
             <div className="flex" key={suggestionConversation.id}>
               <SuggestionConversationCard
                 logo={suggestionConversation.logo}
